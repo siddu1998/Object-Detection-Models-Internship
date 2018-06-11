@@ -37,5 +37,38 @@ If you have been following this instructions then replace PATH with catkin_ws/sr
 
 step 4. Now with the completion of step 3, go to the catkin_ws/src/ORB_SLAM2 and run ./build_ros.sh and wait for the magic to happen. Had you followed the instructions everything should have worked fine, apart from the fact some missing libraries or liboost-dev errors. Incase you find the boost errors, it is pretty simple just google it and the first link you get would help you solve the issue and you can build again.
 
-step 5: Now you want to run and generate the 3D map, once you generate the 3D map you would also like to generate a 2D map using the concept of projections. Before that make sure you have your pointcloud.h libraries within your system. Now the complex part comes, clone this repo (on the desktop) https://github.com/abhineet123/ORB_SLAM2 and replace your catkin_ws/src/ORB_SLAM2/include and catkin_ws/src/ORB_SLAM2/src with the include and src from the newly cloned repo. After this ---------------------UNDER CONSTRUCTION---------------------
-                
+step 5: Now you want to run and generate the 3D map, once you generate the 3D map you would also like to generate a 2D map using the concept of projections. Before that make sure you have your pointcloud.h libraries within your system. Now the complex part comes, clone this repo (on the desktop) https://github.com/abhineet123/ORB_SLAM2 and replace your catkin_ws/src/ORB_SLAM2/include and catkin_ws/src/ORB_SLAM2/src with the /include and /src from the newly cloned repo. After this please run ./build.sh and ./build_ros.sh again and this time in case you get #include <cv/cvbridge.h> error go the mentioned file and feel free to remove the header.
+
+step6: To construct the 2D map, Please follow the following steps. Before you do anything make sure you have enough memory left minimum 50GB left in your computer. First of all take execute the below commands to make a place where all your bag of word models are created and stored (NOTE: IT IS GOING TO CONSUME HUGE AMOUNT OF SPACE ONCE THINGS START FITTING IN).
+                                      
+                                      mkdir ~/bagfiles
+                                      cd ~/bagfiles
+step 7: In your /opt/ros/share make sure you have usb_cam module installed else install 
+                                   
+                                   sudo apt-get install ros-indigo-usb-cam
+Now once you have this open /opt/ros/share/usb_cam/launch and edit video0 to video1 if you are willing to use an external camera. If you are unable to do it, make sure you give the required permissions to edit this file using chmod commands.
+
+
+step 8: open 1 terminal and start the roscore, so in the newly opened terminal type 
+                                           
+                                           roscore
+step 9: Now start the camera node in a new terminal 
+                                         
+                               roslaunch usb_cam usb_cam-test.launch
+                               
+step 10: Once you have the camera running you are ready to run the rosbag and start the ORB_SLAM2 based on ROS.
+In a new terminal  
+                                  
+                                                rosbag record -a
+In a new terminal 
+                   
+             rosrun ORB_SLAM2 Monopub Vocabulary/ORBvoc.txt Examples/Monocular/mono.yaml -1
+             
+step 11: Now since you have the the rosbag ready to collect all the the data and create the bag of words model you have to create a subscriber to the ORB_SLAM which publishes data to the Rosbag. (feel free to change the parameters these are camera dependent and are calibrated to Logitech/iBall older versions) In a new terminal
+                                       
+                                 rosrun ORB_SLAM2 Monosub 30 2 6 -6 6 -6 0.55 0.50 1 5
+
+step 12: You can play the rosbag 
+                                     
+                                  rosbag play YOUR_ROS_BAG_NAME.bag -r 0.5
+              
