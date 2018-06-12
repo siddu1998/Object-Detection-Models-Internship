@@ -6,30 +6,30 @@ import os
 import shutil
 
 if (len(sys.argv) > 2):
-	print "invalid number of arguments:   " + str(len(sys.argv))
-	print "should be 2: 'bag2csv.py' and 'bagName'"
-	print "or just 1  : 'bag2csv.py'"
+	print ("invalid number of arguments:   " + str(len(sys.argv)))
+	print ("should be 2: 'bag2csv.py' and 'bagName'")
+	print ("or just 1  : 'bag2csv.py'")
 	sys.exit(1)
 elif (len(sys.argv) == 2):
 	listOfBagFiles = [sys.argv[1]]
 	numberOfFiles = "1"
-	print "taken into consideratiion 1 bagfile: " + str(listOfBagFiles[0])
+	print ("taken into consideratiion 1 bagfile: " + str(listOfBagFiles[0]))
 elif (len(sys.argv) == 1):
 	listOfBagFiles = [f for f in os.listdir(".") if f[-4:] == ".bag"]	
 	numberOfFiles = str(len(listOfBagFiles))
-	print "reading all " + numberOfFiles + " bagfiles in current directory: \n"
+	print("reading all " + numberOfFiles + " bagfiles in current directory: \n")
 	for f in listOfBagFiles:
 		print f
-	print "\n press ctrl+c in the next 10 seconds to cancel \n"
+	print ("\n press ctrl+c in the next 10 seconds to cancel \n")
 	time.sleep(10)
 else:
-	print "bad argument(s): " + str(sys.argv)
+	print ("bad argument(s): " + str(sys.argv))
 	sys.exit(1)
 
 count = 0
 for bagFile in listOfBagFiles:
 	count += 1
-	print "reading file " + str(count) + " of  " + numberOfFiles + ": " + bagFile
+	print ("reading file " + str(count) + " of  " + numberOfFiles + ": " + bagFile)
 	#access bag
 	bag = rosbag.Bag(bagFile)
 	bagContents = bag.read_messages()
@@ -79,4 +79,4 @@ for bagFile in listOfBagFiles:
 						values.append(pair[1])
 				filewriter.writerow(values)
 	bag.close()
-print "Done reading all " + numberOfFiles + " bag files."
+print ("Done reading all " + numberOfFiles + " bag files.")
