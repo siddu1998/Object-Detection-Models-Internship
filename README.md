@@ -1,6 +1,9 @@
 # Internship Journal and Documentation Invento Robotics
 Documentation and code snippets
 
+# Computer Vision
+Install OpenCV installation of openCV can be done through by simpy running this script. So clone this git link and then store it as install_opencv.sh.  https://github.com/milq/milq/blob/master/scripts/bash/install-opencv.sh. simply go the location and hit ./install_opencv.sh
+
 # Mathematical Assistance required 
 ## Pangolin Installtion : 
 https://github.com/stevenlovegrove/Pangolin  make sure you build well. Incase or error persists pull from branch the second active branch (glsl-annotation). In master brach if the error claims to have have not declared, this is becaise of the issue in the master brach feel free to go into the shown file, and uncomment certain commented lines.
@@ -15,7 +18,7 @@ ROS -> Robotic Operating System : An applicative OS over linux
 
  Please use Ubuntu 16.0.4 if you are willing to make life easier.Recommended installation version ROS-Kinetic 
 http://wiki.ros.org/kinetic/Installation/Ubuntu is the link you should be referring to if this does not work, this might be because of broken packages. Please make sure you have ticked the universal and restricted and multiverse options in your Ubuntu software centre. 
- Not recommended if the normal installation does not work you can tru to build from source (all the best)
+ Not recommended if the normal installation does not work you can try to build from source (all the best)
  
  Now very important files are in your system is your bashrc, nothing to do yet, but to view the bashrc remember it would be in the home directory and will be hidden. If you are willing to see it then ctrl+H will show all the hidden files and from then on you are free to edit. 
 
@@ -45,7 +48,7 @@ step6: To construct the 2D map, Please follow the following steps. Before you do
                                       cd ~/bagfiles
 step 7: In your /opt/ros/share make sure you have usb_cam module installed else install 
                                    
-                                   sudo apt-get install ros-indigo-usb-cam
+                                   sudo apt-get install ros-kinetic-usb-cam
 Now once you have this open /opt/ros/share/usb_cam/launch and edit video0 to video1 if you are willing to use an external camera. If you are unable to do it, make sure you give the required permissions to edit this file using chmod commands.
 
 
