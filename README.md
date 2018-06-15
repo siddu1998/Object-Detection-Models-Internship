@@ -75,3 +75,65 @@ step 12: You can play the rosbag
                                      
                                   rosbag play YOUR_ROS_BAG_NAME.bag -r 0.5
               
+In the above way you can get your ORB SLAM2 running on ROS and generate the map.
+
+
+# SLAM and Navigation using Xbox 360 kinect
+
+## Localization 
+Localization is a method where the the robot knows its relative position in a given 2D map. The 2D Map generated using ORB-SLAM2 can be used but the issue is when you want to deploy for production the accuracy does not meet industry standards. Hence We also discuss SLAM and Mapping using Kinect. 
+
+## Gazebo 
+Before we move onto the actual bot it would be better if we can simulate the navigation and mapping. Gazebo is environment software which allows us to create situations where we would like to simulate the robot. Installing gazebo is pretty simple and straight forward. Visit Gazebo's official website and follow the single line instruction.
+
+## Turtlebot
+Since we are specific to using kinect from the Xbox 360, Turtlebot 2 would be perfect for our simulation. Kinect offers depth-sense image, but the topic ROS navigation stack subscribes to and uses in the navigation stack is Laser Scan data. Hence the way we will be looking to move is convert kinect based data to laser based scan data.
+
+## Conversion launch file
+Execute the following commands to get the conversion node running.
+
+                                               cd catkin_ws
+                                               cd src
+and here create a catkin package
+
+                                               create_catkin_pkg pc2l
+                                               cd .. 
+                                               catkin_make
+                                               source devel/setup.bash
+                                               
+Now go into the pc2l package and create a new folder called launch and copy the contents of start.launch which you will find in the repo.
+ 
+## Procudure
+
+                                       cd catkin_ws
+                                       cd src
+                                       roscore
+                                      (in a new terminal)
+                                      roslaunch pc2l start.launch
+                                      
+                                      (in a new termianl)
+                                      roslaunch turtlebot_gazebo turtlebot_world.launch
+                                      
+                                      (in a new terminal)
+                                      roslaunch turtlebot_teleop keyboard_teleop.launch
+                                      THE ABOVE TERMINAL WILL ALLOW YOU TO NAVIGATE ROUND in GAZEBO
+                                      
+                                      (in a new terminal)
+                                      roslaunch turtlebot_gazebo gmapping_demo.launch
+                                      
+                                      (in a new terminal)
+                                      roslaunch turtlebot_rviz_launchers view_navigation.launch
+                                      THIS OPENS UP AN RVIZ where you can visualize your map
+                                      here set laserscan topic to camera/scan 
+                                      
+                                      (In a new terminal)
+                                      In case you want to save the map formed               
+                                      rosrun map_server map_saver -f <your map name> 
+                                      the above generates .pgm and .yaml file
+                                      
+                                      To Localize and navigate in the map
+                             roslaunch turtlebot_gazebo amcl_demo.launch map_file:=<full path to your map YAML file>
+                             
+                             click 2D pose estimate to localize
+                             click set Nav Goal and point towards where you want to go and this eventually allows the robot to auntomously move to the location
+                             
