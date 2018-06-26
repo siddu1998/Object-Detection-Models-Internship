@@ -6,13 +6,13 @@ Step 2: Clone darknet
 
 Step 3: Clone Yolo-Mark
 
-Step 5: place the images in Yolo-Mark/x64/Release/data/img/
+Step 5: place the images in Yolo-Mark/x64/Release/data/img/ (#### Make sure you have on .jpg images)
 
 Step 6: Navigate to the Yolo-Mark/x64/Release/data/ and change the obj.data to the number of classes you have
 
 Step 7: Open the obj.name in Yolo-Mark/x64/Release/data/ and write down the names of your class
 
-Step 8: navigate to the Yolo-Mark/ and run ./linux_mark.sh if errors pop it is either because you have failed to make the folder or you have not given permission to make the .sh executable
+Step 8: navigate to the Yolo-Mark/ and run ./linux_mark.sh if errors pop it is either because you have failed to make the folder or you have not given permission to make the .sh executable 
 
 Step 9: Keep drawing bounding boxes based on the location of object in the image, and make sure the class for which you are drawing is correctly reflected on the GUI application
 
@@ -25,3 +25,16 @@ Step 12: Run the training
 Step 13: After the training you will get a backup folder in the darknet directory where you Yolo_final.weights use this weights, the yolo.cfg to run detection
 
 Step 14: Have a nice day :-)
+
+------------------------------------------------------------------------------------------------------------------------
+
+## Batch Rename
+
+In general it is a good practice to name your images and the coresponding .txt files in a sequential manner, for this purpose place the rename.sh script in your directory and run the script make sure to replace the .jpg and .txt according what file type you want to change.
+
+Once you have renamed the images and .txt this will be contradictory to your train.txt take the contents in train.txt to a excel and sequentially increase the path to the number of images you have. Then run the training process.
+
+                ./darknet detector train cfg/obj.data cfg/yolo-obj.cfg darknet19_448.conv.23
+
+
+---------------------------------------------------------------------------------------------------------------------------
