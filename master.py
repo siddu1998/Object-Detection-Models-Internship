@@ -18,6 +18,9 @@ def capture_single_image():
 
 
 
+
+
+
 #perform object detection based on class on of objects
 def detect_object_in_image(class_of_objects):
 
@@ -47,16 +50,7 @@ def detect_object_in_image(class_of_objects):
     return list_of_fruits_with_confidence[0][0]
 
 
-
-#step 1 --> generate uuid
-def generate_uuid():
-    return uuid.uuid4()
-#step 2
-
-
-
-
-
+# TODO: Integration of Facial Recognization
 
 
 
