@@ -1,0 +1,50 @@
+Jetson vision server
+
+While(0)
+    If time is 11pm
+        Get new model from server
+        Remove local training model
+        Train first one with default pic
+        Delete local image files
+
+    captureimage()
+
+    If input == "what is this object"
+        objectrecognition()
+    else
+        face detection()
+
+facedetection()
+    Is facedetected > 0
+        facerecognize()
+    return
+
+facerecognize()
+    if CheckLocalFace() is not null
+        return
+
+    else if CheckInRemote() is not null
+        greet()
+        addtolocaltraining()
+
+    else
+        generateUUIDforuser()
+        tellandroidaboutnewuser(UUID)
+        capture20images(UUID)
+        New thread: addtolocaltraining()
+        New thread: uploadimagestoserver(UUID.zip)
+        getProfileDetailsfromandroid()
+        getAgeandOtherDetailsFromFace()
+        updateProfileDetailsforUUID(JSON,uuid)
+
+addtolocaltraining()
+    Open TrainStatus.txt
+    while file contains == training is running
+        sleep(1)
+
+    Write in TrainStatus "training is running"
+    Call Tensorflow for training
+    Write in Train Status == training is done
+
+objectrecognition()
+    sendtoAndroid(object_JSON)
