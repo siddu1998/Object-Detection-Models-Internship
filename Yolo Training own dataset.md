@@ -38,3 +38,16 @@ Once you have renamed the images and .txt this will be contradictory to your tra
 
 
 ---------------------------------------------------------------------------------------------------------------------------
+
+## Running with darkflow (a.k.a running as a python script)
+
+Step 1 : clone the darkflow https://github.com/thtrieu/darkflow 
+Step 2 : create a bin folder in the darkflow
+Step 3 : place the newly generated Yolo_final.weights into the bin
+Step 4 : place the yolo.cfg into the darkflow/cfg
+Step 5 : replace the labels.txt with the number of labels or objects you are detecting  
+Step 6 : if an offset error is happening, follow this link https://github.com/thtrieu/darkflow/issues/107 
+step 7 : clone the video.py from this repo place it in the darkflow repo
+step 8 : Run the video.py
+step 9 : If you wish to capture image and then detect clone the master.py and place it your darkflow repo
+step 10 : Have a nice day :)
