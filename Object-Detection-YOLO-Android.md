@@ -37,4 +37,4 @@ The final objective would be to train your custom objects using YOLO and use Ten
 When you see that average loss 0.xxxxxx avg no longer decreases at many iterations then you should stop training.
 
 ## Testing your model
-1. There would be a weights file generated in `darknet/bin`. Copy the name
+1. There would be a weights file generated in `darknet/bin`. Copy the name (Meta?!)
