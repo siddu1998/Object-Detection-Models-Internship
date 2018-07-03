@@ -31,3 +31,10 @@ The final objective would be to train your custom objects using YOLO and use Ten
    LIBSO=1 to build a library darknet.so and binary runable file uselib that uses this library. Or you can try to run so     LD_LIBRARY_PATH=./:$LD_LIBRARY_PATH ./uselib test.mp4 How to use this SO-library from your own code - you can look at C++ example: https://github.com/AlexeyAB/darknet/blob/master/src/yolo_console_dll.cpp
 5. Run the` make` command.
 6. Download the pre-trained weights from http://pjreddie.com/media/files/darknet53.conv.74 and paste it in the darknet repository.
+7. Run `darknet detector train obj.data yolo-obj.cfg darknet53.conv.74`
+
+## When to stop the training
+When you see that average loss 0.xxxxxx avg no longer decreases at many iterations then you should stop training.
+
+## Testing your model
+1. There would be a weights file generated in `darknet/bin`. Copy the name
