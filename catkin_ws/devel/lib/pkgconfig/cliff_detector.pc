@@ -1,0 +1,8 @@
+prefix=/home/sid/catkin_ws/devel
+
+Name: cliff_detector
+Description: Description of cliff_detector
+Version: 1.0.1
+Cflags: -I/home/sid/catkin_ws/devel/include -I/home/sid/catkin_ws/src/depth_nav_tools/cliff_detector/include
+Libs: -L/home/sid/catkin_ws/devel/lib -lCliffDetector -lCliffDetectorNode -lCliffDetectorNodelet
+Requires: roscpp dynamic_reconfigure image_geometry image_transport nodelet sensor_msgs depth_nav_msgs

@@ -1,0 +1,10 @@
+\subsubsection usage Usage
+\verbatim
+<node name="nav_layer_from_points" pkg="nav_layer_from_points" type="nav_layer_from_points">
+  <param name="enabled" type="bool" value="True" />
+  <param name="keep_time" type="double" value="0.75" />
+  <param name="point_radius" type="double" value="0.2" />
+  <param name="robot_radius" type="double" value="0.6" />
+</node>
+\endverbatim
+

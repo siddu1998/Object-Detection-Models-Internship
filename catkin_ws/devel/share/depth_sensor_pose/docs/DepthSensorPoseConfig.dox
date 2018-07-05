@@ -1,0 +1,20 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~rate" : \b [double] Data processing frequency  (Hz). min: 0.1, default: 10.0, max: 30.0
+- \b "~range_min" : \b [double] Minimum sensor range (in meters). min: 0.2, default: 0.5, max: 10.0
+- \b "~range_max" : \b [double] Maximum sensor range (in meters). min: 0.5, default: 5.0, max: 20.0
+- \b "~mount_height_min" : \b [double] Height of kinect mount (m). min: 0.0, default: 1.4, max: 10.0
+- \b "~mount_height_max" : \b [double] Height of kinect mount (m). min: 0.0, default: 1.6, max: 10.0
+- \b "~tilt_angle_min" : \b [double] Sensor tilt angle (degrees). min: -30.0, default: 20.0, max: 30.0
+- \b "~tilt_angle_max" : \b [double] Sensor tilt angle (degrees). min: -30.0, default: 10.0, max: 30.0
+- \b "~publish_depth" : \b [bool] Determines if depth should be republished. min: False, default: False, max: True
+- \b "~cam_model_update" : \b [bool] If continously camera data update. min: False, default: True, max: True
+- \b "~used_depth_height" : \b [int] Used depth height from img bottom (px). min: 1, default: 400, max: 1000
+- \b "~depth_img_step_row" : \b [int] Rows step in depth processing (px). min: 1, default: 8, max: 100
+- \b "~depth_img_step_col" : \b [int] Columns step in depth processing (px). min: 1, default: 8, max: 100
+- \b "~ground_max_points" : \b [int] Max ground points in selection stage. min: 3, default: 1000, max: 20000
+- \b "~ransac_max_iter" : \b [int] Max number of RANSAC iterations. min: 10, default: 1000, max: 10000
+- \b "~ransac_dist_thresh" : \b [double] RANSAC distance threshold. min: 0.0001, default: 0.01, max: 1.0
+

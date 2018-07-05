@@ -1,0 +1,8 @@
+prefix=/home/sid/catkin_ws/install
+
+Name: my_personal_robotic_companion
+Description: Description of my_personal_robotic_companion
+Version: 1.0.0
+Cflags: -I/home/sid/catkin_ws/install/include
+Libs: -L/home/sid/catkin_ws/install/lib 
+Requires: 

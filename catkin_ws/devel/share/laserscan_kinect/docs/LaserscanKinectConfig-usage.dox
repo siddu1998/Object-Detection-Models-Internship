@@ -1,0 +1,17 @@
+\subsubsection usage Usage
+\verbatim
+<node name="laserscan_kinect" pkg="laserscan_kinect" type="laserscan_kinect">
+  <param name="output_frame_id" type="str" value="camera_depth_frame" />
+  <param name="range_min" type="double" value="0.5" />
+  <param name="range_max" type="double" value="5.0" />
+  <param name="scan_height" type="int" value="440" />
+  <param name="depth_img_row_step" type="int" value="2" />
+  <param name="cam_model_update" type="bool" value="False" />
+  <param name="sensor_mount_height" type="double" value="0.4" />
+  <param name="sensor_tilt_angle" type="double" value="0.0" />
+  <param name="ground_remove_en" type="bool" value="False" />
+  <param name="ground_margin" type="double" value="0.05" />
+  <param name="tilt_compensation_en" type="bool" value="False" />
+</node>
+\endverbatim
+

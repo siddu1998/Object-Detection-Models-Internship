@@ -1,0 +1,16 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~output_frame_id" : \b [str] Frame id for the output laserscan. min: , default: camera_depth_frame, max: 
+- \b "~range_min" : \b [double] Minimum sensor range (m). min: 0.1, default: 0.5, max: 10.0
+- \b "~range_max" : \b [double] Maximum sensor range (m). min: 0.5, default: 5.0, max: 20.0
+- \b "~scan_height" : \b [int] Height of used part of depth img (px). min: 1, default: 440, max: 460
+- \b "~depth_img_row_step" : \b [int] Row step in depth image processing (px). min: 1, default: 2, max: 80
+- \b "~cam_model_update" : \b [bool] If continously camera data update. min: False, default: False, max: True
+- \b "~sensor_mount_height" : \b [double] Height of sensor optical center mount (m). min: 0.0, default: 0.4, max: 10.0
+- \b "~sensor_tilt_angle" : \b [double] Sensor tilt angle (in degrees). min: -30.0, default: 0.0, max: 30.0
+- \b "~ground_remove_en" : \b [bool] Remove ground from scan. min: False, default: False, max: True
+- \b "~ground_margin" : \b [double] Ground margin (m). min: 0.0, default: 0.05, max: 0.5
+- \b "~tilt_compensation_en" : \b [bool] Sensor tilt angle compensation. min: False, default: False, max: True
+

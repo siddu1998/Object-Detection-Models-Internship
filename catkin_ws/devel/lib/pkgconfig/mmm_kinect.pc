@@ -1,0 +1,8 @@
+prefix=/home/sid/catkin_ws/devel
+
+Name: mmm_kinect
+Description: Description of mmm_kinect
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/sid/catkin_ws/devel/lib 
+Requires: 

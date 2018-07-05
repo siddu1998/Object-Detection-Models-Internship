@@ -1,0 +1,8 @@
+prefix=/home/sid/catkin_ws/install
+
+Name: laserscan_kinect
+Description: Description of laserscan_kinect
+Version: 1.0.1
+Cflags: -I/home/sid/catkin_ws/install/include
+Libs: -L/home/sid/catkin_ws/install/lib -lLaserScanKinect -lLaserScanKinectNode -lLaserScanKinectNodelet
+Requires: roscpp dynamic_reconfigure image_geometry image_transport nodelet sensor_msgs

@@ -1,0 +1,2 @@
+beginner_tutorials:depthimage_to_laserscan:learning_tf:my_personal_robotic_companion:pc2l:robot_model:robot_setup_tf:rosserial/rosserial:rosserial/rosserial_arduino:rosserial/rosserial_client:rosserial/rosserial_embeddedlinux:rosserial/rosserial_msgs:rosserial/rosserial_python:rosserial/rosserial_server:rosserial/rosserial_windows:rosserial/rosserial_xbee:teleop_twist_keyboard
+-DCATKIN_DEVEL_PREFIX=/home/sid/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/sid/catkin_ws/install -G Unix Makefiles

@@ -1,0 +1,20 @@
+\subsubsection usage Usage
+\verbatim
+<node name="cliff_detector" pkg="cliff_detector" type="cliff_detector">
+  <param name="output_frame_id" type="str" value="camera_depth_frame" />
+  <param name="rate" type="int" value="10" />
+  <param name="range_min" type="double" value="0.5" />
+  <param name="range_max" type="double" value="5.0" />
+  <param name="sensor_mount_height" type="double" value="0.4" />
+  <param name="sensor_tilt_angle" type="double" value="0.0" />
+  <param name="publish_depth" type="bool" value="False" />
+  <param name="cam_model_update" type="bool" value="True" />
+  <param name="used_depth_height" type="int" value="400" />
+  <param name="block_size" type="int" value="16" />
+  <param name="block_points_thresh" type="int" value="3" />
+  <param name="depth_img_step_row" type="int" value="8" />
+  <param name="depth_img_step_col" type="int" value="8" />
+  <param name="ground_margin" type="double" value="0.05" />
+</node>
+\endverbatim
+

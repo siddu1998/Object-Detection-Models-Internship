@@ -1,0 +1,19 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~output_frame_id" : \b [str] Frame id for the output laserscan. min: , default: camera_depth_frame, max: 
+- \b "~rate" : \b [int] Data processing frequency  (Hz). min: 1, default: 10, max: 30
+- \b "~range_min" : \b [double] Minimum sensor range (in meters). min: 0.2, default: 0.5, max: 10.0
+- \b "~range_max" : \b [double] Maximum sensor range (in meters). min: 0.5, default: 5.0, max: 10.0
+- \b "~sensor_mount_height" : \b [double] Height of kinect mount (m). min: 0.0, default: 0.4, max: 10.0
+- \b "~sensor_tilt_angle" : \b [double] Sensor tilt angle (degrees). min: -30.0, default: 0.0, max: 30.0
+- \b "~publish_depth" : \b [bool] Determines if depth should be republished. min: False, default: False, max: True
+- \b "~cam_model_update" : \b [bool] If continously camera data update. min: False, default: True, max: True
+- \b "~used_depth_height" : \b [int] Used depth height from img bottom (px). min: 1, default: 400, max: 1000
+- \b "~block_size" : \b [int] Square block (subimage) size (px). min: 1, default: 16, max: 100
+- \b "~block_points_thresh" : \b [int] Block stairs points threshold (px). min: 1, default: 3, max: 1000
+- \b "~depth_img_step_row" : \b [int] Rows step in depth processing (px). min: 1, default: 8, max: 100
+- \b "~depth_img_step_col" : \b [int] Columns step in depth processing (px). min: 1, default: 8, max: 100
+- \b "~ground_margin" : \b [double] Ground margin in meters. min: 0.0, default: 0.05, max: 1.0
+

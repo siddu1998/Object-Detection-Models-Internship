@@ -1,0 +1,9 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~enabled" : \b [bool] Whether to apply this plugin or not  min: False, default: True, max: True
+- \b "~keep_time" : \b [double] Pause before clearing points list min: 0.0, default: 0.75, max: 2.0
+- \b "~point_radius" : \b [double] Radius of points which will be add to costmap min: 0.0, default: 0.2, max: 2.0
+- \b "~robot_radius" : \b [double] Radius of the robot min: 0.1, default: 0.6, max: 2.0
+
