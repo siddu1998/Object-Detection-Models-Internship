@@ -37,4 +37,19 @@ The final objective would be to train your custom objects using YOLO and use Ten
 When you see that average loss 0.xxxxxx avg no longer decreases at many iterations then you should stop training.
 
 ## Testing your model
-1. There would be a weights file generated in `darknet/bin`. Copy the name (Meta?!)
+1. There would be a weights file generated in `darknet/bin`. For example `yolo-obj_1000.weights`. Rename it to `final.weights`
+2. Run `darknet.exe detector test obj.data yolo-obj.cfg final.weights
+
+### What happens if no object is detected
+1. This means that the training did not go well. Check that average loss is less than at least a 0.6.
+2. With worst case scenario, try testing with the images supplied for training to know if the weights file works.
+3. Add a parameter `--thresh 0` when testing the model.
+
+### Too many bounding boxes when tried testing
+1. This could be caused because of the size of the training images supplied. Try using nothing more than `400x400px` resolution for the training images.
+2. This could also meman training had not gone well.
+
+## Running the model on android
+1. To run the model on android we need to convert our weights file into tensorflow weights file. To do so clone the darkflow repository from https://github.com/thtrieu/darkflow.
+2. Then we use tensorflow's default mobile apk to run our model.
+3. Follow the http://seangtkelley.me/blog/2017/12/23/using-custom-yolov2-model-on-android for more information on this.
