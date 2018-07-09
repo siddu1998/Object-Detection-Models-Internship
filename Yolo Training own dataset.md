@@ -41,7 +41,7 @@ Once you have renamed the images and .txt this will be contradictory to your tra
 
 ## Running with darkflow (a.k.a running as a python script)
 
-Step 1 : clone the darkflow https://github.com/thtrieu/darkflow 
+Step 1 : clone the darkflow https://github.com/thtrieu/darkflow and follow installation instructions mentioned in the link
 
 Step 2 : create a bin folder in the darkflow
 
