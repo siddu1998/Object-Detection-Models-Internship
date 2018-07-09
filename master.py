@@ -1,6 +1,19 @@
 from darkflow.net.build import TFNet
 import cv2
 import uuid
+from flask import Flask,jsonify
+
+
+#Load model
+model_name='fruits'
+
+options = {
+            "model": "cfg/{}.cfg".format(model_name),
+            "load": "bin/{}.weights".format(model_name),
+            "labels":"{}.txt".format(model_name),
+            "threshold": 0.50
+          }
+tfnet = TFNet(options)
 
 
 #perform single image capture
@@ -8,52 +21,33 @@ def capture_single_image():
     cap = cv2.VideoCapture(0)
     ret,frame = cap.read()
     while(True):
-        cv2.imshow('img1',frame) #display the captured image
+        #cv2.imshow('img1',frame) #display the captured image
         cv2.imwrite('c1.jpg',frame)
         cv2.destroyAllWindows()
         break
 
     cap.release()
 
-
-
-
-
-
-
-#perform object detection based on class on of objects
-def detect_object_in_image(class_of_objects):
-
-    #Open Camera and Capture Single Image
-    capture_single_image()
-
-    # Weights file dict based on to detect objects class
-    weights_dict={"liquor":"liquor.weights", "fruits":"fruits.weights"}
-
-    # config file dict based on to detect objects class
-    cfg_dict={"liquor":"liquor.cfg", "fruits":"fruits.cfg"}
-
-    #Load required files for detection
-    options = {
-               "model": "cfg/{}".format(cfg_dict[class_of_objects]),
-               "load": "bin/{}".format(weights_dict[class_of_objects]),
-               "threshold": 0.5
-              }
-    tfnet = TFNet(options)
-    list_of_fruits_with_confidence=[]
-    imgcv = cv2.imread("./c1.jpg")
+    imgcv = cv2.imread("./flop.jpg")
     results = tfnet.return_predict(imgcv)
-    for result in results:
-        list_of_fruits_with_confidence.append((result['label'],result['confidence']))
-
-    #return what object
-    return list_of_fruits_with_confidence[0][0]
-
-
-# TODO: Integration of Facial Recognization
+    return(results)
 
 
 
 
-# Object detection Perform
-answers=detect_object_in_image("fruits")
+
+
+
+app=Flask(__name__)
+
+@app.route('/get_{}'.format(model_name),methods=['GET'])
+def get_fruit():
+    results=capture_single_image()
+    classes_detected = "No {} detected".format(model_name)
+
+    if len(results)>0:
+        classes_detected=results[0]['label']
+
+    return classes_detected
+
+app.run(host='0.0.0.0',port = 10000)
