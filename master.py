@@ -28,7 +28,7 @@ def capture_single_image():
 
     cap.release()
 
-    imgcv = cv2.imread("./flop.jpg")
+    imgcv = cv2.imread("./c1.jpg")
     results = tfnet.return_predict(imgcv)
     return(results)
 
