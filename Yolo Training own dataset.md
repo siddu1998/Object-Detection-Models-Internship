@@ -49,7 +49,7 @@ Step 3 : place the newly generated <generated>.weights into the bin
 
 Step 4 : place the <generated>.cfg into the darkflow/cfg
 
-Step 5 : replace the labels.txt with the number of labels or objects you are detecting  
+Step 5 : replace the labels.txt with the obj.names used during training 
 
 Step 6 : if an offset error is happening, follow this link https://github.com/thtrieu/darkflow/issues/107 
 
