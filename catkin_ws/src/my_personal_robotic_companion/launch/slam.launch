@@ -1,5 +1,5 @@
 <launch>
-    <include file="$(find my_personal_robotic_companion)/launch/urdf.launch"/>
+   <!-- <include file="$(find my_personal_robotic_companion)/launch/urdf.launch"/> -->
  
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
         <!--remap from="scan" to="base_scan"/-->
@@ -21,8 +21,8 @@
         <param name="srt" value="0.02"/>
         <param name="str" value="0.01"/>
         <param name="stt" value="0.02"/>
-        <param name="linearUpdate" value="0.4"/>
-        <param name="angularUpdate" value="0.4"/>
+        <param name="linearUpdate" value="0.0"/>
+        <param name="angularUpdate" value="0.0"/>
         <param name="temporalUpdate" value="-1.0"/>
         <param name="resampleThreshold" value="0.5"/>
         <param name="particles" value="80"/>
@@ -38,7 +38,7 @@
         <param name="transform_publish_period" value="0.1"/>
     </node>
 
-    <node name="teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen" launch-prefix="xterm -e"/>
+   <!-- <node name="teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen" launch-prefix="xterm -e"/> -->
 
     <node pkg="rviz" name="rviz" type="rviz" args="-d $(find my_personal_robotic_companion)/launch/rviz/slam.rviz"/>
 </launch>
