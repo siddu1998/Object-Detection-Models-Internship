@@ -11,3 +11,9 @@ To visulaize the depth scan
 3. Run rosrun rviz rviz
 
 4. Set PoinCloud2 topic to /camera/dept_registered/points
+
+
+## Setting up ROS on a Real Bot
+1. Cerate a catkin worksapace or clone the catkin workspace in the current repository
+
+2. run catkin_make
