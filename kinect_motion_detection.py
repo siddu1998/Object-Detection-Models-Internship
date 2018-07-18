@@ -103,13 +103,17 @@ while 1:
 
         if(flag120[1:3]==[1, 1] and f12==1):
             cv2.putText(dst," frwd",(325,90),cv2.FONT_HERSHEY_DUPLEX,1,(2),1)
+	    arduino.write('f'.encode())
         elif(flag120[2:4]==[1, 1] and f12==1):
 	        cv2.putText(dst," right",(325,90),cv2.FONT_HERSHEY_DUPLEX,1,(2),1)
-        elif(flag120[0:2]==[1, 1] and f12==1):
+        	arduino.write('r'.endcode())
+	elif(flag120[0:2]==[1, 1] and f12==1):
 	        cv2.putText(dst," left",(325,90),cv2.FONT_HERSHEY_DUPLEX,1,(2),1)
+		arduino.write('l'.encode())
         elif(f12==1):
 	        cv2.putText(dst," back",(325,90),cv2.FONT_HERSHEY_DUPLEX,1,(2),1)
-
+		arduino.encode('mb'.encode())
+		
         cv2.line(dst,(130,0),(130,480),(0),1)
         cv2.line(dst,(320,0),(320,480),(0),1)
         cv2.line(dst,(510,0),(510,480),(0),1)
