@@ -2,7 +2,8 @@ import freenect
 import cv2
 import numpy as np
 from functions import *
-
+import serial
+arduino = serial.Serial(port='/dev/ttyACM0')
 
 
 
