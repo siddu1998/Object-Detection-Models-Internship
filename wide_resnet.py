@@ -1,4 +1,4 @@
-# This code is imported from the following project: https://github.com/asmith26/wide_resnets_keras
+#during the intern period i used a very simple implementation of WideResnet but feel free to use someother implementation
 
 import logging
 import sys
@@ -32,20 +32,14 @@ class WideResNet:
             self._channel_axis = -1
             self._input_shape = (image_size, image_size, 3)
 
-    # Wide residual network http://arxiv.org/abs/1605.07146
+   
     def _wide_basic(self, n_input_plane, n_output_plane, stride):
         def f(net):
-            # format of conv_params:
-            #               [ [kernel_size=("kernel width", "kernel height"),
-            #               strides="(stride_vertical,stride_horizontal)",
-            #               padding="same" or "valid"] ]
-            # B(3,3): orignal <<basic>> block
             conv_params = [[3, 3, stride, "same"],
                            [3, 3, (1, 1), "same"]]
 
             n_bottleneck_plane = n_output_plane
 
-            # Residual block
             for i, v in enumerate(conv_params):
                 if i == 0:
                     if n_input_plane != n_output_plane:
@@ -74,10 +68,6 @@ class WideResNet:
                                           kernel_regularizer=l2(self._weight_decay),
                                           use_bias=self._use_bias)(convs)
 
-            # Shortcut Connection: identity function or 1x1 convolutional
-            #  (depends on difference between input & output shape - this
-            #   corresponds to whether we are using the first block in each
-            #   group; see _layer() ).
             if n_input_plane != n_output_plane:
                 shortcut = Conv2D(n_output_plane, kernel_size=(1, 1),
                                          strides=stride,
@@ -93,7 +83,6 @@ class WideResNet:
         return f
 
 
-    # "Stacking Residual Units on the same stage"
     def _layer(self, block, n_input_plane, n_output_plane, count, stride):
         def f(net):
             net = block(n_input_plane, n_output_plane, stride)(net)
@@ -103,7 +92,6 @@ class WideResNet:
 
         return f
 
-#    def create_model(self):
     def __call__(self):
         logging.debug("Creating model...")
 
@@ -120,8 +108,6 @@ class WideResNet:
                               kernel_initializer=self._weight_init,
                               kernel_regularizer=l2(self._weight_decay),
                               use_bias=self._use_bias)(inputs)  # "One conv at the beginning (spatial size: 32x32)"
-
-        # Add wide residual blocks
         block_fn = self._wide_basic
         conv2 = self._layer(block_fn, n_input_plane=n_stages[0], n_output_plane=n_stages[1], count=n, stride=(1, 1))(conv1)
         conv3 = self._layer(block_fn, n_input_plane=n_stages[1], n_output_plane=n_stages[2], count=n, stride=(2, 2))(conv2)
@@ -129,7 +115,6 @@ class WideResNet:
         batch_norm = BatchNormalization(axis=self._channel_axis)(conv4)
         relu = Activation("relu")(batch_norm)
 
-        # Classifier block
         pool = AveragePooling2D(pool_size=(8, 8), strides=(1, 1), padding="same")(relu)
         flatten = Flatten()(pool)
         predictions_g = Dense(units=2, kernel_initializer=self._weight_init, use_bias=self._use_bias,
