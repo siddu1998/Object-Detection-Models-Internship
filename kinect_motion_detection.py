@@ -123,12 +123,13 @@ while 1:
 		arduino.write('l'.encode())
         elif(f12==1):
 	        cv2.putText(dst," back",(325,90),cv2.FONT_HERSHEY_DUPLEX,1,(2),1)
-		arduino.encode('mb'.encode())
+		arduino.encode('b'.encode())
 	
-		
+	#Split the frame into 3 parts	
         cv2.line(dst,(130,0),(130,480),(0),1)
         cv2.line(dst,(320,0),(320,480),(0),1)
         cv2.line(dst,(510,0),(510,480),(0),1)
+	#Display video in frame with blocked direction and each pixel distance
         cv2.imshow('Video', dst)
         if(cv2.waitKey(1) & 0xFF == ord('b')):
             break
