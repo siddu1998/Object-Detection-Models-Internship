@@ -14,14 +14,14 @@ class FaceCV(object):
     Singleton class for face recongnition task
     """
     CASE_PATH = "./pretrained_models/haarcascade_frontalface_alt.xml"
-    WRN_WEIGHTS_PATH = "https://github.com/Tony607/Keras_age_gender/releases/download/V1.0/weights.18-4.06.hdf5"
+    WRN_WEIGHTS_PATH = "---IMBD || WIKI weights path (Alredy given with Aswin Sir)"
 
-
+    #Establishing SuperClass
     def __new__(cls, weight_file=None, depth=16, width=8, face_size=64):
         if not hasattr(cls, 'instance'):
             cls.instance = super(FaceCV, cls).__new__(cls)
         return cls.instance
-
+    #Variables intilization
     def __init__(self, depth=16, width=8, face_size=64):
         self.face_size = face_size
         self.model = WideResNet(face_size, depth=depth, k=width)()
@@ -31,13 +31,14 @@ class FaceCV(object):
                          cache_subdir=model_dir)
         self.model.load_weights(fpath)
 
-    @classmethod
-    def draw_label(cls, image, point, label, font=cv2.FONT_HERSHEY_SIMPLEX,
-                   font_scale=1, thickness=2):
-        size = cv2.getTextSize(label, font, font_scale, thickness)[0]
-        x, y = point
-        cv2.rectangle(image, (x, y - size[1]), (x + size[0], y), (255, 0, 0), cv2.FILLED)
-        cv2.putText(image, label, point, font, font_scale, (255, 255, 255), thickness)
+        """ I have commented out this medthod since we dont need to see the out put in real time once on the Jetson"""
+#     @classmethod
+#     def draw_label(cls, image, point, label, font=cv2.FONT_HERSHEY_SIMPLEX,
+#                    font_scale=1, thickness=2):
+#         size = cv2.getTextSize(label, font, font_scale, thickness)[0]
+#         x, y = point
+#         cv2.rectangle(image, (x, y - size[1]), (x + size[0], y), (255, 0, 0), cv2.FILLED)
+#         cv2.putText(image, label, point, font, font_scale, (255, 255, 255), thickness)
 
     def crop_face(self, imgarray, section, margin=40, size=64):
         """
@@ -73,17 +74,18 @@ class FaceCV(object):
         resized_img = np.array(resized_img)
         return resized_img, (x_a, y_a, x_b - x_a, y_b - y_a)
 
+""" Anyone involved with changes in the recog please edit only this method the rest has been verified and checked"""
+
     def detect_face(self):
         face_cascade = cv2.CascadeClassifier(self.CASE_PATH)
 
-        # 0 means the default video capture device in OS
         video_capture = cv2.VideoCapture(0)
-        # infinite loop, break by key ESC
+
         while True:
             if not video_capture.isOpened():
                 sleep(5)
-            # Capture frame-by-frame
             ret, frame = video_capture.read()
+            #Since the training was done after converting into blackand white. Please change current frame in Gray
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             faces = face_cascade.detectMultiScale(
                 gray,
@@ -91,12 +93,13 @@ class FaceCV(object):
                 minNeighbors=10,
                 minSize=(self.face_size, self.face_size)
             )
-            # placeholder for cropped faces
             face_imgs = np.empty((len(faces), self.face_size, self.face_size, 3))
             for i, face in enumerate(faces):
                 face_img, cropped = self.crop_face(frame, face, margin=40, size=self.face_size)
-                (x, y, w, h) = cropped
-                cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 200, 0), 2)
+                #I have commented out these two lines which involve drawing the box. Here we have drawing to do
+                #(x, y, w, h) = cropped
+                #cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 200, 0), 2)
+                
                 face_imgs[i,:,:,:] = face_img
             if len(face_imgs) > 0:
                 # predict ages and genders of the detected faces
@@ -106,14 +109,15 @@ class FaceCV(object):
                 predicted_ages = results[1].dot(ages).flatten()
             # draw results
             for i, face in enumerate(faces):
+                #After a lot of experimentation these confidents seem to work the best trust me
                 label = "{}, {}".format(int(predicted_ages[i]),
                                         "F" if predicted_genders[i][0] > 0.15 else "M")
                 self.draw_label(frame, (face[0], face[1]), label)
 
             cv2.imshow('Keras Faces', frame)
-            if cv2.waitKey(5) == 27:  # ESC key press
+            if cv2.waitKey(5) == 27:  
                 break
-        # When everything is done, release the capture
+    
         video_capture.release()
         cv2.destroyAllWindows()
 
