@@ -13,7 +13,7 @@ class FaceCV(object):
     """
     Singleton class for face recongnition task
     """
-    CASE_PATH = "pretrained_models/haarcascade_frontalface_alt.xml"
+    CASE_PATH = "./pretrained_models/haarcascade_frontalface_alt.xml"
     WRN_WEIGHTS_PATH = "https://github.com/Tony607/Keras_age_gender/releases/download/V1.0/weights.18-4.06.hdf5"
 
 
@@ -77,35 +77,45 @@ class FaceCV(object):
         face_cascade = cv2.CascadeClassifier(self.CASE_PATH)
 
         # 0 means the default video capture device in OS
-        frame=cv2.imread("./0002.jpg")
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        faces = face_cascade.detectMultiScale(
-            gray,
-            scaleFactor=1.2,
-            minNeighbors=10,
-            minSize=(self.face_size, self.face_size)
-        )
-        # placeholder for cropped faces
-        face_imgs = np.empty((len(faces), self.face_size, self.face_size, 3))
-        for i, face in enumerate(faces):
-            face_img, cropped = self.crop_face(frame, face, margin=40, size=self.face_size)
-            (x, y, w, h) = cropped
-            cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 200, 0), 2)
-            face_imgs[i,:,:,:] = face_img
-        if len(face_imgs) > 0:
-            # predict ages and genders of the detected faces
-            results = self.model.predict(face_imgs)
-            predicted_genders = results[0]
-            ages = np.arange(0, 101).reshape(101, 1)
-            predicted_ages = results[1].dot(ages).flatten()
-        # draw results
-        for i, face in enumerate(faces):
-            label = "{}, {}".format(int(predicted_ages[i]),
-                                    "F" if predicted_genders[i][0] > 0.5 else "M")
-            print(label)
-            self.draw_label(frame, (face[0], face[1]), label)
+        video_capture = cv2.VideoCapture(0)
+        # infinite loop, break by key ESC
+        while True:
+            if not video_capture.isOpened():
+                sleep(5)
+            # Capture frame-by-frame
+            ret, frame = video_capture.read()
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade.detectMultiScale(
+                gray,
+                scaleFactor=1.2,
+                minNeighbors=10,
+                minSize=(self.face_size, self.face_size)
+            )
+            # placeholder for cropped faces
+            face_imgs = np.empty((len(faces), self.face_size, self.face_size, 3))
+            for i, face in enumerate(faces):
+                face_img, cropped = self.crop_face(frame, face, margin=40, size=self.face_size)
+                (x, y, w, h) = cropped
+                cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 200, 0), 2)
+                face_imgs[i,:,:,:] = face_img
+            if len(face_imgs) > 0:
+                # predict ages and genders of the detected faces
+                results = self.model.predict(face_imgs)
+                predicted_genders = results[0]
+                ages = np.arange(0, 101).reshape(101, 1)
+                predicted_ages = results[1].dot(ages).flatten()
+            # draw results
+            for i, face in enumerate(faces):
+                label = "{}, {}".format(int(predicted_ages[i]),
+                                        "F" if predicted_genders[i][0] > 0.15 else "M")
+                self.draw_label(frame, (face[0], face[1]), label)
 
-        cv2.imshow('Keras Faces', frame)
+            cv2.imshow('Keras Faces', frame)
+            if cv2.waitKey(5) == 27:  # ESC key press
+                break
+        # When everything is done, release the capture
+        video_capture.release()
+        cv2.destroyAllWindows()
 
 
 def get_args():
