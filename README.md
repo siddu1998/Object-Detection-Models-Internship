@@ -1,5 +1,5 @@
 # Internship Journal and Documentation Invento Robotics
-Documentation and code snippets
+Documentation  : Sai Siddartha Maram
 
 # Computer Vision
 Install OpenCV installation of openCV can be done through by simpy running this script. So clone this git link and then store it as install_opencv.sh.  https://github.com/milq/milq/blob/master/scripts/bash/install-opencv.sh. simply go the location and hit ./install_opencv.sh
